@@ -13,6 +13,9 @@ from bokeh.server.server import Server
 model = load('xgbooster')
 vocab = load('feature')
 
+app = Flask(__name__)
+api = Api(app)
+
 from sklearn.feature_extraction.text import TfidfVectorizer
 transformer = TfidfVectorizer(min_df=2, max_df=0.6, smooth_idf=True,
                               norm = 'l2', ngram_range=[1,2], max_features=125000,
