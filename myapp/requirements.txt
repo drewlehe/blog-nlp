@@ -1,0 +1,13 @@
+spacy
+gensim
+numpy
+pandas
+nltk
+sklearn
+joblib
+flask
+bokeh
+tornado
+threading
+flask_restful
+symspellpy
