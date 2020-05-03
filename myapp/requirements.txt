@@ -11,3 +11,4 @@ tornado
 threading
 flask_restful
 symspellpy
+gunicorn
