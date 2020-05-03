@@ -44,16 +44,16 @@ def bkapp(doc):
         
 @app.route('/', methods=['GET'])
 def bkapp_page():
-    script = server_document('http://localhost:7000/bkapp')
+    script = server_document('http://localhost:5006/bkapp')
     return render_template("embed.html", script=script, template="Flask")
 
 
 def bk_worker():
-    server = Server({'/bkapp': bkapp}, io_loop=IOLoop(), allow_websocket_origin=["localhost:7000"])
+    server = Server({'/bkapp': bkapp}, io_loop=IOLoop(), allow_websocket_origin=["localhost:8000", "127.0.0.1:5006"])
     server.start()
     server.io_loop.start()
 
 Thread(target=bk_worker).start()
 
 if __name__ == '__main__':
-    app.run(debug=True, port=7000)
+    app.run(debug=True, port=8000)
