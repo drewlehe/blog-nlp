@@ -6,7 +6,9 @@ from gensim.parsing.preprocessing import strip_short
 from symspellpy import SymSpell, Verbosity
 import pkg_resources
 import re
-nlp = spacy.load('en_core_web_sm')
+import en_core_web_sm
+nlp = en_core_web_sm.load()
+# nlp = spacy.load('en_core_web_sm')
 sym_spell = SymSpell(max_dictionary_edit_distance=2, prefix_length=7)
 dictionary_path = pkg_resources.resource_filename("symspellpy", "frequency_dictionary_en_82_765.txt")
 sym_spell.load_dictionary(dictionary_path, term_index=0, count_index=1)
@@ -17,7 +19,7 @@ stops = list(
 a about above across after afterwards again against all almost alone along
 already also although am among amongst amount an and another any anyhow
 anyone anything anyway anywhere are around as at
-be became because become becomes becoming been before beforehand behind
+be became because become becomes becoming been behind
 being below beside besides between beyond both bottom but by
 can cannot ca could
 did do does doing done down due during
@@ -25,7 +27,7 @@ each eight either eleven else elsewhere empty enough even ever every
 everyone everything everywhere except
 fifteen fifty first five for former formerly forty four from front full
 further
-i if in is it its itself
+if in is it its itself
 latter latterly least less
 must my myself
 namely neither never nevertheless next nine no none noone nor not
@@ -36,7 +38,7 @@ part per perhaps please put
 quite
 rather re really regarding
 same say see seem seemed seeming seems serious several she should show side
-since six sixty so some somehow someone something sometime sometimes somewhere
+six sixty so some somehow someone something sometime sometimes somewhere
 ten than that the their then there thereafter
 thereby therefore therein thereupon these they third this those though three
 thru thus to twelve twenty
