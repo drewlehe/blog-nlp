@@ -1,3 +1,4 @@
+'''Launches a Bokeh app which runs on a standalone server. Seperate from the Flask app.'''
 import bokeh
 from bokeh.models import Button, Paragraph, TextInput, WidgetBox
 from bokeh.plotting import curdoc, figure
