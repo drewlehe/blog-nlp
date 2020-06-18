@@ -7,10 +7,13 @@ from symspellpy import SymSpell, Verbosity
 import pkg_resources
 import re
 nlp = spacy.load('en_core_web_sm')
+#SymSpell runs spellcheck on the blogposts:
 sym_spell = SymSpell(max_dictionary_edit_distance=2, prefix_length=7)
 dictionary_path = pkg_resources.resource_filename("symspellpy", "frequency_dictionary_en_82_765.txt")
 sym_spell.load_dictionary(dictionary_path, term_index=0, count_index=1)
-# stops = [spacy.lang.en.stop_words.STOP_WORDS] + stopwords.words('english') + ['tbsp', 'like','unlink', 'link', 'tbsp', 'get', 'one', 'get', 'know', 'really', 'time', 'well', 'think', 'got', 'would', 'going', 'day']
+
+#Custom stopword list. Most NLP libraries include their own stoplists, but they're too large for what I'm trying to accomplish.
+#With author identification, stopword lists need to be very small.
 
 stops = list(
     """
@@ -43,7 +46,6 @@ whereafter whereas whereby wherein whereupon wherever whether which while
 whither who whoever whole whom whose why will with within without would
 """.split()
 ) + ['tbsp', 'like', 'PRON', 'unlink', 'urllink', 'link', 'tbsp', 'get', 'blog', 'blogs', 'one', 'get', 'know', 'really', 'time', 'well', 'think', 'got', 'would', 'going', 'day']
-# df['tokens'] = df['text'].map(lambda x: nlp.tokenizer(x.lower()))
 
 def clean_jv(doc):
    typo_free = ' '.join([(sym_spell.lookup(i, Verbosity.CLOSEST, max_edit_distance=2, include_unknown=True)[0].term) for i in doc])
@@ -51,7 +53,6 @@ def clean_jv(doc):
    return twol_free
 def clean(lst):
     lst = nlp.tokenizer(lst.lower())
-#     lst = [token for token in lst if not token.is_stop]
     lst = [token.lemma_ for token in lst if str(token.lemma_) not in stops]
     lst = [re.sub(r'[\W\d\s]', '', string) for string in lst]
     while '' in lst:
