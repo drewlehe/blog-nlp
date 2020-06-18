@@ -45,7 +45,8 @@ various via what whatever when whence whenever where
 whereafter whereas whereby wherein whereupon wherever whether which while
 whither who whoever whole whom whose why will with within without would
 """.split()
-) + ['tbsp', 'like', 'PRON', 'unlink', 'urllink', 'link', 'tbsp', 'get', 'blog', 'blogs', 'one', 'get', 'know', 'really', 'time', 'well', 'think', 'got', 'would', 'going', 'day']
+) + ['tbsp', 'like', 'PRON', 'unlink', 'urllink', 'link', 'tbsp', 'get', 'blog', 
+     'blogs', 'one', 'get', 'know', 'really', 'time', 'well', 'think', 'got', 'would', 'going', 'day']
 
 def clean_jv(doc):
    typo_free = ' '.join([(sym_spell.lookup(i, Verbosity.CLOSEST, max_edit_distance=2, include_unknown=True)[0].term) for i in doc])
